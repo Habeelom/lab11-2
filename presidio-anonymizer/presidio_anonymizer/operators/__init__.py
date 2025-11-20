@@ -1,43 +1,41 @@
-"""Initializing all the existing anonymizers."""
-
-from .operator import OperatorType, Operator  # isort:skip
-from .aes_cipher import AESCipher
-from .custom import Custom
-from .deanonymize_keep import DeanonymizeKeep
-from .encrypt import Encrypt
-
-from .decrypt import Decrypt  # isort:skip
+"""Anonymizer operators."""
+from .operator import Operator, OperatorType
 from .hash import Hash
-from .keep import Keep
 from .mask import Mask
 from .redact import Redact
 from .replace import Replace
+from .custom import Custom
+from .encrypt import Encrypt
+from .decrypt import Decrypt
+from .keep import Keep
+from .deanonymize_keep import DeanonymizeKeep
+from .initial import Initial  # <--- 1. Ensure this is here
 
+# Optional dependencies
 try:
-    from .ahds_surrogate import AHDSSurrogate
+    from .surrogate_ahds import AHDSSurrogate
     AHDS_AVAILABLE = True
 except ImportError:
     AHDSSurrogate = None
     AHDS_AVAILABLE = False
 
+# 2. Factory MUST be imported LAST to prevent circular errors
 from .operators_factory import OperatorsFactory  # isort:skip
 
 __all__ = [
-    "OperatorType",
     "Operator",
+    "OperatorType",
     "Hash",
     "Mask",
     "Redact",
-    "Keep",
-    "DeanonymizeKeep",
     "Replace",
     "Custom",
     "Encrypt",
     "Decrypt",
-    "AESCipher",
+    "Keep",
+    "DeanonymizeKeep",
+    "Initial",  # <--- 3. Ensure this is in the list
     "OperatorsFactory",
+    "AHDSSurrogate",
     "AHDS_AVAILABLE",
 ]
-
-if AHDS_AVAILABLE:
-    __all__.append("AHDSSurrogate")
