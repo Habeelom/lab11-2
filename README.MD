@@ -1,3 +1,23 @@
+ANSWERS:
+
+1.
+0 . The factory does not use if/elif logic to select the operator. It uses if statements only for error handling The actual selection is done with a dictionary lookup.
+
+2.
+Dictionary (dict). The variable operators_by_type is a dictionary where the keys are strings  and the values are the class types.
+
+3. 
+The Strategy Pattern allows for selecting an algorithm at runtime.
+
+Context: The AnonymizerEngine needs to perform an action but doesn't care how it's done.
+
+Strategy: The Operator abstract base class defines the interface.
+
+Concrete Strategies: Classes like Initial, Redact, and Hash implement the specific logic.
+
+Mechanism: Instead of a hard coded switch or massive if/elif block, the Factory uses a Dictionary to map names to strategies. This allows us to add the new Initial operator by simply registering it in the list, without changing the core logic of how operators are retrieved
+
+
 > **Note:**  
 > This repository is based on a copy of `microsoft/presidio` (11/2025).  
 > It only includes **presidio-anonymizer** and removes all other modules under Presidio.  
