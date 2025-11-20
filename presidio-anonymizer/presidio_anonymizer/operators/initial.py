@@ -7,8 +7,16 @@ class Initial(Operator):
     """
 
     def operate(self, text: str = None, params: Dict = None) -> str:
-        # Minimal implementation for now
-        return ""
+        if not text:
+            return ""
+        
+        # split() without arguments automatically handles multiple spaces
+        words = text.split()
+        
+        # Take first char, uppercase it, add dot
+        initials = [f"{word[0].upper()}." for word in words]
+        
+        return " ".join(initials)
 
     def validate(self, params: Dict = None) -> None:
         pass

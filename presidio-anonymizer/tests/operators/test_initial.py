@@ -1,5 +1,6 @@
 import pytest
-from presidio_anonymizer.operators import Initial 
+from presidio_anonymizer.operators import Initial
+
 def test_correct_name():
     assert Initial().operator_name() == "initial"
 
@@ -7,20 +8,9 @@ def test_correct_name():
     "input_text, initials",
     [
         ("John Smith", "J. S."),
-    ],
-)
-def test_given_value_for_initial(input_text, initials):
-    text = Initial().operate(input_text) == initials
-    assert text == initials
-
-@pytest.mark.parametrize(
-    "input_text, initials",
-    [
-        ("John Smith", "J. S."),
-        ("      Eastern    Michigan   University ", "E. M. U."), # <--- New Case
+        ("      Eastern    Michigan   University ", "E. M. U."),
     ],
 )
 def test_given_value_for_initial(input_text, initials):
     text = Initial().operate(input_text)
     assert text == initials
-    #updated
